@@ -13,12 +13,18 @@ import it.unipd.tos.model.User;
 
 public class TakeAwayManager implements TakeAwayBill {
     public double getOrderPrice(List<MenuItem> itemsOrdered, User user, LocalTime time) throws TakeAwayBillException {
-        double total = 0.0;
+        double totalFood = 0.0;
+        double totalDrink = 0.0;
         int nrGelati = 0;
         double gelatoLessExpensive = Double.MAX_VALUE;
-        
+
         for (MenuItem menuItem : itemsOrdered) {
-            total += menuItem.getPrice();
+            if(menuItem.getType() == MenuItem.items.Bevanda) {
+                totalDrink += menuItem.getPrice();
+            }
+            else {
+                totalFood += menuItem.getPrice();
+            }
 
             if(menuItem.getType() == MenuItem.items.Gelato) {
                 nrGelati++;
@@ -29,8 +35,13 @@ public class TakeAwayManager implements TakeAwayBill {
         }
 
         if(nrGelati > 5){
-            total -= (gelatoLessExpensive/2); 
+            totalFood -= (gelatoLessExpensive/2); 
         }
-        return total;
+
+        if(totalFood > 50.0){
+            totalFood -= (totalFood*0.1);
+        }
+        
+        return totalDrink + totalFood;   
     }
 }
