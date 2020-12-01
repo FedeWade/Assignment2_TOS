@@ -32,5 +32,34 @@ public class TakeAwayManagerTest{
         }
     }
 
+    @Test
+    public void Discount50PerCentLessExpensiveGelatoWith5PlusGelatoOrder_Test() throws TakeAwayBillException{
+        List<MenuItem> itemsOrdered = new ArrayList<MenuItem>();
+        User user = new User(1,"Luciano Firi","via Pollo",LocalDate.of(1996,06,06));
+        LocalTime time = LocalTime.of(12,15);
+        TakeAwayManager testBill = new TakeAwayManager();
+
+        itemsOrdered.add(new MenuItem("Panino primavera", MenuItem.items.Panino, 4.00));
+        itemsOrdered.add(new MenuItem("Coca cola" , MenuItem.items.Bevanda, 1.50));
+        itemsOrdered.add(new MenuItem("Panino vegetariano", MenuItem.items.Panino, 3.50));
+        itemsOrdered.add(new MenuItem("Hot dog" , MenuItem.items.Panino, 4.00));
+        itemsOrdered.add(new MenuItem("Coppa pioppo" , MenuItem.items.Gelato, 3.00));
+        itemsOrdered.add(new MenuItem("Coppa pioppo" , MenuItem.items.Gelato, 3.00));
+        itemsOrdered.add(new MenuItem("Coppa pioppo" , MenuItem.items.Gelato, 3.00));
+        itemsOrdered.add(new MenuItem("Panino primavera", MenuItem.items.Panino, 4.00));
+        itemsOrdered.add(new MenuItem("Coca cola" , MenuItem.items.Bevanda, 1.50));
+        itemsOrdered.add(new MenuItem("Coppa pioppo" , MenuItem.items.Gelato, 3.00));
+        itemsOrdered.add(new MenuItem("Hot dog" , MenuItem.items.Panino, 4.00));
+        itemsOrdered.add(new MenuItem("Coppa pioppo" , MenuItem.items.Gelato, 3.00));
+        itemsOrdered.add(new MenuItem("Coppa pioppo" , MenuItem.items.Gelato, 3.00));
+
+        try {
+            assertEquals(39.00, testBill.getOrderPrice(itemsOrdered, user, time), 0.0);
+        } 
+        catch (TakeAwayBillException exc){
+            exc.getMessage();
+        }
+    }
+
     
 }
