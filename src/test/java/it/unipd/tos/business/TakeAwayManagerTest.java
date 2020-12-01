@@ -119,5 +119,24 @@ public class TakeAwayManagerTest{
         catch (TakeAwayBillException exc){
             exc.getMessage();
         }
-    }  
+    } 
+    
+    @Test
+    public void UserIsUnder18_TimeBetween18And19_Test(){
+        List<MenuItem> itemsOrdered = new ArrayList<MenuItem>();
+        User user = new User(1,"Luciano Firi","via Pollo",LocalDate.of(2005,06,06));
+        LocalTime time = LocalTime.of(18,35);
+        TakeAwayManager testBill = new TakeAwayManager();
+
+        itemsOrdered.add(new MenuItem("Panino kebab", MenuItem.items.Panino, 4.00));
+        itemsOrdered.add(new MenuItem("Fanta", MenuItem.items.Bevanda, 1.50));
+        itemsOrdered.add(new MenuItem("Coppa alaska", MenuItem.items.Gelato, 2.50));
+
+        try{
+            assertEquals(0.0, testBill.getOrderPrice(itemsOrdered, user, time), 0.0);
+        } 
+        catch (TakeAwayBillException exc){
+            exc.getMessage();
+        }
+    }
 }

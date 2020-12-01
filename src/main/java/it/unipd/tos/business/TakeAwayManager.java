@@ -39,6 +39,10 @@ public class TakeAwayManager implements TakeAwayBill {
             throw new TakeAwayBillException("Non ci possono essere più di 30 elementi nell'ordine");
         }
 
+        if(user.isUnder18() && time.getHour() == 18){
+            return 0;
+        }
+
         if(nrGelati > 5){
             totalFood -= (gelatoLessExpensive/2); 
         }
