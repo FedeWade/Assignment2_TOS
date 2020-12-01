@@ -27,7 +27,7 @@ public class TakeAwayManagerTest{
         itemsOrdered.add(new MenuItem("Coppa alaska", MenuItem.items.Gelato, 2.50));
 
         try{
-            assertEquals(8, testBill.getOrderPrice(itemsOrdered, user, time), 0.0);
+            assertEquals(8.5, testBill.getOrderPrice(itemsOrdered, user, time), 0.0);
         } 
         catch (TakeAwayBillException exc){
             exc.getMessage();
@@ -104,5 +104,20 @@ public class TakeAwayManagerTest{
         testBill.getOrderPrice(itemsOrdered, user, time);
     } 
 
-    
+    @Test
+    public void TotalPriceLessThan10Euros_Test() throws TakeAwayBillException {
+        List<MenuItem> itemsOrdered = new ArrayList<MenuItem>();
+        User user = new User(1,"Luciano Firi","via Pollo",LocalDate.of(1996,06,06));
+        LocalTime time = LocalTime.of(12,15);
+        TakeAwayManager testBill = new TakeAwayManager();
+
+        itemsOrdered.add(new MenuItem("Coppa pioppo" , MenuItem.items.Gelato, 3.00));
+
+        try {
+            assertEquals(3.5, testBill.getOrderPrice(itemsOrdered, user, time), 0.0);
+        } 
+        catch (TakeAwayBillException exc){
+            exc.getMessage();
+        }
+    }  
 }

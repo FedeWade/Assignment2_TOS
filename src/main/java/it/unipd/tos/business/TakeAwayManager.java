@@ -17,6 +17,7 @@ public class TakeAwayManager implements TakeAwayBill {
         double totalDrink = 0.0;
         int nrGelati = 0;
         double gelatoLessExpensive = Double.MAX_VALUE;
+        double commisione = 0.5;
 
         for (MenuItem menuItem : itemsOrdered) {
             if(menuItem.getType() == MenuItem.items.Bevanda) {
@@ -46,6 +47,11 @@ public class TakeAwayManager implements TakeAwayBill {
             totalFood -= (totalFood*0.1);
         }
         
-        return totalDrink + totalFood;   
+        if(totalDrink + totalFood < 10.0) {
+            return totalDrink + totalFood + commisione;    
+        }
+        else {
+            return totalDrink + totalFood;
+        }   
     }
 }
