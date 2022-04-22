@@ -8,7 +8,7 @@ The assignment consist in developing a simple Java application following the goo
 - Create the project using Maven-quick-start archetype.
 - Configuration of the build process.
 - Setup and activate static code analysis.
-- Configuration of the Continous integration with TravisCI or GitHub Action.
+- Configuration of the Continous integration with [TravisCI](https://travis-ci.org/) or [GitHub Action](https://github.com/features/actions).
 - Develop source code and tests.
 
-For the detailed istructions of the assignment read [Assignment2.pdf](/assignment2.pdf).
+To read the assignment detailed requirements please read [Assignment2.pdf](/assignment2.pdf).
